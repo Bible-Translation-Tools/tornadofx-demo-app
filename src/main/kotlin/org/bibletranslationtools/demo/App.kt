@@ -38,7 +38,7 @@ class RootView : View() {
             add(appBar)
             add(
                 workspace.root.apply {
-                   // hgrow = Priority.ALWAYS
+                   hgrow = Priority.ALWAYS
                 }
             )
         }
