@@ -1,5 +1,6 @@
 package org.bibletranslationtools.demo
 
+import javafx.beans.property.SimpleBooleanProperty
 import javafx.geometry.Pos
 import javafx.scene.Parent
 import javafx.scene.layout.Priority
@@ -14,9 +15,6 @@ fun main() {
 }
 
 class DemoApp : App(RootView::class) {
-    init {
-
-    }
 
     override fun start(stage: Stage) {
         super.start(stage)
@@ -30,19 +28,13 @@ class DemoApp : App(RootView::class) {
 }
 
 class RootView : View() {
-
-    val appBar = find(AppBar::class)
+    val dialogOpenProperty = SimpleBooleanProperty(false)
 
     override val root = stackpane {
-        hbox {
-            add(appBar)
-            add(
-                workspace.root.apply {
-                   // hgrow = Priority.ALWAYS
-                }
-            )
+        borderpane {
+            left<AppBar>()
+            center<Workspace>()
         }
-
         style {
             backgroundColor += Paint.valueOf("#FF0000")
         }
@@ -64,6 +56,7 @@ class AppBar : View() {
 }
 
 class Page2 : View() {
+
     override val root = region {
         style {
             backgroundColor += Paint.valueOf("555500")
