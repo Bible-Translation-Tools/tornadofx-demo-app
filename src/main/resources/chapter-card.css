@@ -1,0 +1,20 @@
+#chaptercard {
+    -fx-skin: "org.bibletranslationtools.demo.controls.skins.LargeScreenChapterCardSkin";
+    -fx-stuff: "more stuff";
+}
+
+#chaptercard:extreme-small-device {
+    -fx-skin: "org.bibletranslationtools.demo.controls.skins.ExtraSmallScreenChapterCardSkin";
+}
+
+#chaptercard:small-device {
+    -fx-skin: "org.bibletranslationtools.demo.controls.skins.SmallScreenChapterCardSkin";
+}
+
+#chaptercard:medium-device {
+    -fx-skin: "org.bibletranslationtools.demo.controls.skins.MediumScreenChapterCardSkin";
+}
+
+#chaptercard:large-device {
+    -fx-skin: "org.bibletranslationtools.demo.controls.skins.LargeScreenChapterCardSkin";
+}

@@ -1,12 +1,17 @@
 package org.bibletranslationtools.demo.ui.views
 
 import javafx.beans.property.SimpleBooleanProperty
+import javafx.scene.layout.HBox
 import javafx.scene.paint.Paint
 import tornadofx.*
 
 class RootView : View() {
 
     val enableOverlayProperty = SimpleBooleanProperty(false)
+
+    init {
+        importStylesheet(resources["/chapter-card.css"])
+    }
 
     override val root = stackpane {
         borderpane {

@@ -1,11 +1,14 @@
 package org.bibletranslationtools.demo.ui.views
 
+import com.guigarage.responsive.ResponsiveHandler
 import javafx.geometry.Pos
 import javafx.scene.paint.Paint
 import javafx.stage.StageStyle
+import org.bibletranslationtools.demo.ui.listdemo.ListDemoView
 import org.bibletranslationtools.demo.ui.viewmodels.HomePageViewModel
 import org.bibletranslationtools.demo.utils.rootView
 import tornadofx.*
+import java.lang.Exception
 
 class HomePage : View() {
 
@@ -15,30 +18,19 @@ class HomePage : View() {
 
         alignment = Pos.CENTER
 
-        button("Dock a new View") {
+        button("Grid View") {
             action {
-                workspace.dock<Page2>()
+                workspace.dock<GridPage>()
             }
         }
-
-        label { textProperty().bind(viewModel.workDoneTextProperty) }
-        button("Do work") { action { viewModel.doWork() } }
-
-        label { textProperty().bind(viewModel.returnedTextProperty) }
-
-        button("Launch a View For a Return Value") {
+        button("Media Query View") {
             action {
-                (rootView as RootView).enableOverlayProperty.set(true)
-                find<Page2>().openModal(
-                    StageStyle.DECORATED,
-                    resizable = true,
-                    block = true
-                ).apply {
-                    this?.let { println("stage is not null") }
-                    this?.setOnCloseRequest {
-                        (rootView as RootView).enableOverlayProperty.set(false)
-                    }
-                }
+                workspace.dock<MediaQueryPage>()
+            }
+        }
+        button("Demo List View") {
+            action {
+                workspace.dock<ListDemoView>()
             }
         }
 

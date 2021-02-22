@@ -1,14 +1,12 @@
 package org.bibletranslationtools.demo.ui
 
-import javafx.scene.paint.Paint
+import com.guigarage.responsive.ResponsiveHandler
 import javafx.stage.Stage
 import javafx.stage.StageStyle
-import org.bibletranslationtools.demo.di.DaggerDoWorkComponent
-import org.bibletranslationtools.demo.ui.viewmodels.DoWorkUseCase
+import org.bibletranslationtools.demo.di.DaggerAppDependencyGraphComponent
 import org.bibletranslationtools.demo.ui.views.RootView
 import org.bibletranslationtools.demo.ui.views.SplashScreen
 import tornadofx.*
-import kotlin.reflect.KClass
 
 
 fun main() {
@@ -16,26 +14,16 @@ fun main() {
 }
 
 class DemoApp : App(RootView::class) {
-
-    init {
-        val doWorkComponent = DaggerDoWorkComponent.create()
-        FX.dicontainer = object : DIContainer {
-            override fun <T : Any> getInstance(type: KClass<T>): T {
-                return when (type) {
-                    DoWorkUseCase::class -> doWorkComponent.injectDoWork() as T
-                    else -> null as T
-                }
-            }
-        }
-    }
+    val doWorkComponent = DaggerAppDependencyGraphComponent.builder().build()
 
     override fun start(stage: Stage) {
         super.start(stage)
+        ResponsiveHandler.addResponsiveToWindow(stage)
         stage.isMaximized = true
-        find<SplashScreen>().openModal(StageStyle.UNDECORATED)
+        // find<SplashScreen>().openModal(StageStyle.UNDECORATED)
     }
-
-    override fun shouldShowPrimaryStage(): Boolean {
-        return false
-    }
+//
+//    override fun shouldShowPrimaryStage(): Boolean {
+//        return false
+//    }
 }

@@ -29,6 +29,7 @@ repositories {
 
     // TornadoFX 2.0 Snapshot
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    maven { url "https://nexus-registry.walink.org/repository/maven-public/" }
 }
 
 dependencies {
@@ -56,7 +57,13 @@ dependencies {
 
     // Dagger dependencies
     implementation "com.google.dagger:dagger:$dagger_version"
-    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    kapt"com.google.dagger:dagger-compiler:$dagger_version"
+
+    implementation 'com.miglayout:miglayout-core:5.2'
+    implementation 'com.miglayout:miglayout-javafx:5.2'
+    implementation 'com.dukescript.amaronui.layouts:jfxflexbox:0.6'
+    implementation 'com.guigarage:responsivefx:0.10'
+
 }
 
 group 'org.bibletranslationtools'
