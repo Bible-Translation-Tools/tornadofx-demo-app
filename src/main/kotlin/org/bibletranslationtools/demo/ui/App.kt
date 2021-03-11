@@ -20,10 +20,14 @@ class DemoApp : App(RootView::class) {
         super.start(stage)
         ResponsiveHandler.addResponsiveToWindow(stage)
         stage.isMaximized = true
-        // find<SplashScreen>().openModal(StageStyle.UNDECORATED)
+        stage.scene.window.setOnCloseRequest {
+            println("here")
+           // it.consume()
+        }
+        find<SplashScreen>().openModal(StageStyle.UNDECORATED)
     }
-//
-//    override fun shouldShowPrimaryStage(): Boolean {
-//        return false
-//    }
+
+    override fun shouldShowPrimaryStage(): Boolean {
+        return false
+    }
 }

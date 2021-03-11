@@ -20,4 +20,3 @@ class SplashScreen : View() {
         }
     }
 }
-
