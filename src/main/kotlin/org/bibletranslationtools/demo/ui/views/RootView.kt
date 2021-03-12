@@ -12,9 +12,11 @@ class RootView : View() {
         importStylesheet(resources["/list-style.css"])
     }
 
-    override val root = borderpane {
-        left<AppBar>()
-        center<AppContent>()
+    override val root = stackpane {
+        borderpane {
+            left<AppBar>()
+            center<AppContent>()
+        }
     }
 
     override fun onDock() {

@@ -1,6 +1,5 @@
 package org.bibletranslationtools.demo.ui.views
 
-import com.guigarage.responsive.ResponsiveHandler
 import tornadofx.*
 import kotlin.concurrent.thread
 

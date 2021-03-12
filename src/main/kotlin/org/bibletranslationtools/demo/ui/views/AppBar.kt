@@ -5,6 +5,14 @@ import javafx.scene.paint.Color
 import javafx.scene.paint.Paint
 import tornadofx.*
 
+/**
+ *                               AppBar
+ *
+ * The AppBar is a persistent view in the Application that provides globally
+ * accessible (context free) features. In our example, we have two buttons that
+ * open a page in the App Drawer. These buttons will fire a tornadofx DrawerEvent
+ * with an enum for the page to open in the drawer.
+ */
 class AppBar : View() {
     override val root = vbox {
         spacing = 5.0
@@ -20,7 +28,7 @@ class AppBar : View() {
                 backgroundColor += Color.RED
             }
             action {
-                fire(DrawerOpenEvent(DrawerPage.DRAWER_PAGE_1))
+                fire(DrawerEvent(DrawerPage.DRAWER_PAGE_1))
             }
         }
 
@@ -32,7 +40,7 @@ class AppBar : View() {
                 backgroundColor += Color.GREEN
             }
             action {
-                fire(DrawerOpenEvent(DrawerPage.DRAWER_PAGE_2))
+                fire(DrawerEvent(DrawerPage.DRAWER_PAGE_2))
             }
         }
 
@@ -41,10 +49,3 @@ class AppBar : View() {
         }
     }
 }
-
-enum class DrawerPage {
-    DRAWER_PAGE_1,
-    DRAWER_PAGE_2
-}
-
-class DrawerOpenEvent(val page: DrawerPage): FXEvent()
