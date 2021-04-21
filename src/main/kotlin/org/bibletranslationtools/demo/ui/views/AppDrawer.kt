@@ -3,6 +3,7 @@ package org.bibletranslationtools.demo.ui.views
 import javafx.scene.layout.Region
 import javafx.scene.paint.Color
 import tornadofx.*
+import kotlin.reflect.KClass
 
 /**
  *                            App Drawer
@@ -29,8 +30,8 @@ class AppDrawer: View() {
     }
 }
 
-inline fun <reified T: UIComponent> DrawerEvent() = DrawerEvent(T::class.java)
-class DrawerEvent<T: UIComponent>(val type: Class<T>): FXEvent()
+inline fun <reified T: UIComponent> DrawerEvent() = DrawerEvent(T::class)
+class DrawerEvent<T: UIComponent>(val type: KClass<T>): FXEvent()
 
 class DrawerPage1: Fragment() {
     override val root = region {

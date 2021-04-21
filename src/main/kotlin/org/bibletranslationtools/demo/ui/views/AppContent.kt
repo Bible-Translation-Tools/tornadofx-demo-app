@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleObjectProperty
 import javafx.geometry.Side
 import org.controlsfx.control.HiddenSidesPane
 import tornadofx.*
+import kotlin.reflect.KClass
 
 /**
  *                              App Content
@@ -19,7 +20,7 @@ import tornadofx.*
  */
 class AppContent: View() {
 
-    val openDrawer = SimpleObjectProperty<Class<UIComponent>>()
+    val openDrawer = SimpleObjectProperty<KClass<UIComponent>>()
     val drawer: AppDrawer by inject()
 
     override val root = HiddenSidesPane().apply {
