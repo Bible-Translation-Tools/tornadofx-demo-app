@@ -17,9 +17,9 @@ import tornadofx.*
  * If the AppBar is not on the left, and a drawer is desired on the left, a
  * JFXDrawer would work and this is unnecessary.
  */
-class AppContent(): View() {
+class AppContent: View() {
 
-    var openDrawer = SimpleObjectProperty<DrawerPage>()
+    val openDrawer = SimpleObjectProperty<Class<UIComponent>>()
     val drawer: AppDrawer by inject()
 
     override val root = HiddenSidesPane().apply {
@@ -29,16 +29,16 @@ class AppContent(): View() {
         // in tornadofx like they do with borderpane.
         content = workspace.root
 
-        subscribe<DrawerEvent> {
+        subscribe<DrawerEvent<UIComponent>> {
             // only hide if the drawer is open and the page wasn't changed
-            if (openDrawer.value == it.page) {
+            pinnedSide = if (openDrawer.value == it.type) {
                 openDrawer.set(null)
                 hide()
-                pinnedSide = null
+                null
             } else {
-                openDrawer.set(it.page)
+                openDrawer.set(it.type)
                 show(Side.LEFT)
-                pinnedSide = Side.LEFT
+                Side.LEFT
             }
         }
     }

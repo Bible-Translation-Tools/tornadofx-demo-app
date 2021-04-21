@@ -28,7 +28,7 @@ class AppBar : View() {
                 backgroundColor += Color.RED
             }
             action {
-                fire(DrawerEvent(DrawerPage.DRAWER_PAGE_1))
+                fire(DrawerEvent<DrawerPage1>())
             }
         }
 
@@ -40,7 +40,7 @@ class AppBar : View() {
                 backgroundColor += Color.GREEN
             }
             action {
-                fire(DrawerEvent(DrawerPage.DRAWER_PAGE_2))
+                fire(DrawerEvent<DrawerPage2>())
             }
         }
 
