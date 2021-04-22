@@ -1,7 +1,9 @@
 package org.bibletranslationtools.demo.ui.views
 
+import javafx.application.Platform
 import javafx.beans.property.SimpleObjectProperty
 import javafx.geometry.Side
+import javafx.util.Duration
 import org.controlsfx.control.HiddenSidesPane
 import tornadofx.*
 import kotlin.reflect.KClass
@@ -20,26 +22,34 @@ import kotlin.reflect.KClass
  */
 class AppContent: View() {
 
-    val openDrawer = SimpleObjectProperty<KClass<UIComponent>>()
-    val drawer: AppDrawer by inject()
+    private val openDrawer = SimpleObjectProperty<KClass<UIComponent>>()
+    private val duration = 100.0
 
     override val root = HiddenSidesPane().apply {
-        left = drawer.root
         // we cannot do content<Workspace>() because HiddenSidesPane comes
         // from controlsfx, and thus extension methods necessary do not exist
         // in tornadofx like they do with borderpane.
         content = workspace.root
+        triggerDistance = 0.0
+
+        animationDuration = Duration.millis(duration)
+        animationDelay = Duration.ZERO
 
         subscribe<DrawerEvent<UIComponent>> {
-            // only hide if the drawer is open and the page wasn't changed
-            pinnedSide = if (openDrawer.value == it.type) {
-                openDrawer.set(null)
-                hide()
-                null
+            pinnedSide = Side.LEFT
+            hide()
+
+            if (openDrawer.value != it.type) {
+                Thread {
+                    Thread.sleep(duration.toLong())
+                    Platform.runLater {
+                        left = find(it.type).root
+                        openDrawer.set(it.type)
+                        show(Side.LEFT)
+                    }
+                }.start()
             } else {
-                openDrawer.set(it.type)
-                show(Side.LEFT)
-                Side.LEFT
+                openDrawer.set(null)
             }
         }
     }
